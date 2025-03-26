@@ -22,7 +22,7 @@ function AboutUs() {
           <div className="bg-gray-800 rounded-2xl shadow-md p-6 hover:shadow-xl transition">
             <h2 className="text-xl font-semibold text-red-400 mb-2">📚 Wide Collection</h2>
             <p className="text-gray-400">
-              We offer books across genres like Fiction, Non-Fiction, Mystery, Sci-Fi, Romance, and more to cater to all kinds of readers.
+              We offer books acrosss genres like Fiction, Non-Fiction, Mystery, Sci-Fi, Romance, and more to cater to all kinds of readers.
             </p>
           </div>
 
