@@ -12,7 +12,15 @@ const path = require("path")
 
 const _dirname = path.resolve()
 
-app.use(cors())
+
+app.use(
+  cors({
+    origin: "*", // Optional if frontend and backend are on the same domain after deployment
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 
 app.use(express.json())
 app.use("/api/v1",user)
