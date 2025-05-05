@@ -36,7 +36,7 @@ function Navbar() {
     const role = useSelector((state)=>state.auth.role)
 
     if(isLoggedIn===false){
-      links.splice(3,2)
+      links.splice(3,3)
     }
 
     if(isLoggedIn===true && role === "user"){
@@ -51,51 +51,98 @@ function Navbar() {
 
   return (
     <>
-    <nav className='z-50 relative bg-zinc-800 text-white px-8 py-4 flex items-center justify-between'>
-      <NavLink to={"/"} className='flex justify-center items-center'>
-        <img className='h-10 me-4' src="https://cdn-icons-png.flaticon.com/128/10433/10433049.png" alt="logo-book" />
-        <h1 className='text-2xl font-semibold'>BookHeaven</h1>
-      </NavLink>
-      <div className='nav-links-bookheaven block md:flex items-center gap-4'>
-        <div className='hidden md:flex gap-4'>
-        {links.map((items,i)=>
-            <NavLink to={items.link} className='hover:text-blue-500 transition-all duration-250' key={i}>{items.title}</NavLink>
-        )}
-        </div>
-        <div className='hidden md:flex gap-4'>
-            {isLoggedIn===false && (
-              <>
-              <NavLink to={"/Login"} className='px-2 py-1 border border-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300'>Login</NavLink>
-              <NavLink to={"/Signup"} className='px-2 py-1 bg-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300'>Sign-Up</NavLink>
-              </>
-            )}
-        </div>
-        <button className='md:hidden block text-white text-2xl hover:text-blue-600' onClick={()=>mobilenav==="hidden"?setmobilenav("block"):setmobilenav("hidden")}>
-          <IoMenuSharp />
-        </button>
-      </div>
+  <nav className="z-50 relative bg-zinc-800 text-white px-8 py-4 flex items-center justify-between">
+    {/* Logo */}
+    <NavLink to={"/"} className="flex justify-center items-center">
+      <img
+        className="h-10 me-4"
+        src="https://cdn-icons-png.flaticon.com/128/10433/10433049.png"
+        alt="logo-book"
+      />
+      <h1 className="text-2xl font-semibold">BookHeaven</h1>
+    </NavLink>
 
-      {/* //mobilenav */}
-    </nav>
-    <div className={`${mobilenav} bg-zinc-800 h-screen absolute top-0 left-0 w-full z-40 flex flex-col items-center justify-center`}>
-    {links.map((items,i)=>
-            <NavLink to={items.link} className='text-white text-2xl font-semibold mb-6 hover:text-blue-500 transition-all duration-250' 
-            key={i} onClick={()=>mobilenav==="hidden"?setmobilenav("block"):setmobilenav("hidden")} >
-            {items.title}
-            </NavLink>
-        )}
-        {isLoggedIn===false && (
-          <>
-          <NavLink to={"/Login"} className='mb-6 px-4 text-2xl font-semibold py-1 border border-blue-500 rounded text-white hover:bg-white hover:text-zinc-800 transition-all duration-300'>
+    {/* Desktop Nav Links */}
+    <div className="nav-links-bookheaven hidden md:flex items-center gap-4">
+      {links.map((items, i) => (
+        <NavLink
+          to={items.link}
+          className="hover:text-blue-500 transition-all duration-250"
+          key={i}
+        >
+          {items.title}
+        </NavLink>
+      ))}
+
+      {/* Login/Signup Links (Desktop) */}
+      {isLoggedIn === false && (
+        <>
+          <NavLink
+            to={"/Login"}
+            className="px-2 py-1 border border-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
+          >
             Login
           </NavLink>
-          <NavLink to={"/Signup"} className='mb-6 px-4 text-2xl font-semibold py-1 bg-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300'>
+          <NavLink
+            to={"/Signup"}
+            className="px-2 py-1 bg-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
+          >
             Sign-Up
           </NavLink>
-          </>
-        )}
+        </>
+      )}
     </div>
-    </>
+
+    {/* Mobile Menu Button */}
+    <button
+      className="md:hidden block text-white text-2xl hover:text-blue-600"
+      onClick={() =>
+        mobilenav === "hidden"
+          ? setmobilenav("block")
+          : setmobilenav("hidden")
+      }
+    >
+      <IoMenuSharp />
+    </button>
+  </nav>
+
+  {/* Mobile Navigation Menu */}
+  <div
+    className={`${mobilenav} bg-zinc-800 fixed top-0 left-0 w-full h-screen z-40 flex flex-col items-center justify-center gap-8 transition-all duration-300 overflow-y-auto`}
+  >
+    {links.map((items, i) => (
+      <NavLink
+        to={items.link}
+        className="text-white text-2xl font-semibold hover:text-blue-500 transition-all duration-250"
+        key={i}
+        onClick={() => setmobilenav("hidden")} // Close menu after clicking
+      >
+        {items.title}
+      </NavLink>
+    ))}
+
+    {/* Login/Signup Links (Mobile) */}
+    {isLoggedIn === false && (
+      <>
+        <NavLink
+          to={"/Login"}
+          className="px-4 py-2 text-2xl font-semibold border border-blue-500 rounded text-white hover:bg-white hover:text-zinc-800 transition-all duration-300"
+          onClick={() => setmobilenav("hidden")}
+        >
+          Login
+        </NavLink>
+        <NavLink
+          to={"/Signup"}
+          className="px-4 py-2 text-2xl font-semibold bg-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
+          onClick={() => setmobilenav("hidden")}
+        >
+          Sign-Up
+        </NavLink>
+      </>
+    )}
+  </div>
+</>
+
   )
 }
 

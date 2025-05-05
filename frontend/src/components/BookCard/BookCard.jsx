@@ -16,10 +16,10 @@ function BookCard(prop) {
     })
       .then((res) => res.json())
       .then((resp) => {
-        console.log("deleted", resp);
+        alert(resp.message);
       })
       .catch((error) => {
-        console.error("Error deleting book:", error);
+        alert("Error deleting book:", error);
       });
   };
   

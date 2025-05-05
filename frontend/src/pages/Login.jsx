@@ -36,8 +36,8 @@ function Login() {
           })
             .then((res) => res.json()) 
             .then((resp) => {
-              console.log("Full Response:", resp); // Check full response
-
+              // console.log("Full Response:", resp); // Check full response
+              
               dispatch(authActions.login())
               dispatch(authActions.changeRole(resp.role))
 
@@ -45,15 +45,17 @@ function Login() {
                 localStorage.setItem("id", resp.id); 
                 localStorage.setItem("token", resp.token);
                 localStorage.setItem("role", resp.role);
-                console.log("Data stored successfully!");
+                // console.log("Data stored successfully!");
+                navigate("/profile")
               } else {
-                console.error("Incorrect response format. Check resp:", resp);
+                alert(resp.message)
+                // console.error("Incorrect response format. Check resp:", resp);
               }
-              navigate("/profile")
+          
 
             })
             .catch((error) => {
-              console.error("Error:", error.message);
+              // console.error("Error:", error.message);
             });
           
           }

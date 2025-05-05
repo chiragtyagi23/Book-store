@@ -74,7 +74,7 @@ router.get("/get-all-books",async(req,res)=>{
 //get recently added books with limit 4 (which i have to show on home page)
 router.get("/get-recent-books",async(req,res)=>{
     try {
-        const books = await Book.find().sort({createdAt:-1}).limit(4)
+        const books = await Book.find().sort({createdAt:-1}).limit(4)  //createdAt -1 means descending order and 1 means asc order
         return res.json({status:"success",data:books})
     } catch (error) {
         res.status(500).json({message:"Internal server error"})

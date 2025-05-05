@@ -36,7 +36,7 @@ function Settings() {
     })
       .then((res) => res.json())
       .then((resp) => {
-        console.log("Updated:", resp);
+        alert("Updated:", resp);
       })
       .catch((err) => console.log("Error updating address:", err));
   }
